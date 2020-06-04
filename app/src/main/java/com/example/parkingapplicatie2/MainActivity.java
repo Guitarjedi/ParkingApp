@@ -19,12 +19,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity implements ParkingAdapter.OnItemClickListener{
 
-    public static final String EXTRA_FULLNAME = "fullName";
-    public static final String EXTRA_FREEPLACES = "freePlaces";
-    public static final String EXTRA_NAME = "name";
-    public static final String EXTRA_ADRES = "adres";
-    public static final String EXTRA_CONTACTINFO = "contactInfo";
-    public static final String EXTRA_TOTALCAP = "totalCap";
     public static final String EXTRA_PARKING = "clickerParking";
 
 

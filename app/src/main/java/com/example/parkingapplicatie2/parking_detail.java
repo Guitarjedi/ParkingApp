@@ -9,14 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-import static com.example.parkingapplicatie2.MainActivity.EXTRA_ADRES;
-import static com.example.parkingapplicatie2.MainActivity.EXTRA_CONTACTINFO;
-import static com.example.parkingapplicatie2.MainActivity.EXTRA_FREEPLACES;
-import static com.example.parkingapplicatie2.MainActivity.EXTRA_FULLNAME;
 import static com.example.parkingapplicatie2.MainActivity.EXTRA_PARKING;
-import static com.example.parkingapplicatie2.MainActivity.EXTRA_TOTALCAP;
-import static com.example.parkingapplicatie2.MainActivity.EXTRA_NAME;
-
 
 public class parking_detail extends AppCompatActivity {
 
