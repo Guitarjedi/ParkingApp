@@ -14,20 +14,21 @@ import java.util.ArrayList;
 public class ParkingAdapter extends RecyclerView.Adapter<ParkingAdapter.ParkingViewHolder> {
 
     private ArrayList<Parking> mParkingList;
-    private OnItemClickListener mListener;
-
-    public interface OnItemClickListener{
-        void onItemClick(int position);
+    public ParkingAdapter(ArrayList<Parking> parkings)
+    {
+        mParkingList = parkings;
     }
+
+    private OnItemClickListener mListener;
     public void setOnItemClickListener(OnItemClickListener listener)
     {
         mListener = listener;
     }
 
-    public ParkingAdapter(ArrayList<Parking> parkings)
-    {
-        mParkingList = parkings;
+    public interface OnItemClickListener{
+        void onItemClick(int position);
     }
+
 
     @NonNull
     @Override

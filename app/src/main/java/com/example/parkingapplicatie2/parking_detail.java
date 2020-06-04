@@ -13,6 +13,7 @@ import static com.example.parkingapplicatie2.MainActivity.EXTRA_ADRES;
 import static com.example.parkingapplicatie2.MainActivity.EXTRA_CONTACTINFO;
 import static com.example.parkingapplicatie2.MainActivity.EXTRA_FREEPLACES;
 import static com.example.parkingapplicatie2.MainActivity.EXTRA_FULLNAME;
+import static com.example.parkingapplicatie2.MainActivity.EXTRA_PARKING;
 import static com.example.parkingapplicatie2.MainActivity.EXTRA_TOTALCAP;
 import static com.example.parkingapplicatie2.MainActivity.EXTRA_NAME;
 
@@ -25,13 +26,14 @@ public class parking_detail extends AppCompatActivity {
         setContentView(R.layout.activity_parking_detail);
 
         Intent intent = getIntent();
+        Parking p = (Parking)intent.getSerializableExtra(EXTRA_PARKING);
 
-        String fullName = intent.getStringExtra(EXTRA_FULLNAME);
-        String name = intent.getStringExtra(EXTRA_NAME);
-        String contactInfo = intent.getStringExtra(EXTRA_CONTACTINFO);
-        String freePlaces = intent.getStringExtra(EXTRA_FREEPLACES);
-        String address = intent.getStringExtra(EXTRA_ADRES);
-        String totalCap = intent.getStringExtra(EXTRA_TOTALCAP);
+        String fullName = p.getName();
+        String name = p.getDescription();
+        String contactInfo = p.getContactInfo();
+        int freePlaces = p.getParkingStatus().getAvailableCapacity();
+        String address = p.getAddress();
+        int totalCap = p.getParkingStatus().getTotalCapacity();
 
 
         TextView fullNameTV = findViewById(R.id.fullName);
@@ -42,14 +44,14 @@ public class parking_detail extends AppCompatActivity {
         TextView totalCapTV = findViewById(R.id.totalCap);
 
 
-        fullNameTV.setText(fullName.toUpperCase());
+        fullNameTV.setText(fullName);
         nameTV.setText(name);
         contactTV.setText(contactInfo);
-        freePlacesTV.setText(freePlaces);
+        freePlacesTV.setText(Integer.toString(freePlaces));
         addressTV.setText(address);
-        totalCapTV.setText(totalCap);
+        totalCapTV.setText(Integer.toString(totalCap));
 
-        double percentageFree = Double.parseDouble(freePlaces)/Double.parseDouble(totalCap);
+        double percentageFree = (double)freePlaces/(double)totalCap;
         if(percentageFree > 0.75){int green = Color.rgb(0, 128, 0); freePlacesTV.setBackgroundColor(green); }
         else if(percentageFree < 0.05){freePlacesTV.setBackgroundColor(Color.RED);}
         else{ int orange = Color.rgb(255, 165, 0);

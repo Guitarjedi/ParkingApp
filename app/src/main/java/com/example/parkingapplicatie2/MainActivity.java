@@ -25,14 +25,15 @@ public class MainActivity extends AppCompatActivity implements ParkingAdapter.On
     public static final String EXTRA_ADRES = "adres";
     public static final String EXTRA_CONTACTINFO = "contactInfo";
     public static final String EXTRA_TOTALCAP = "totalCap";
+    public static final String EXTRA_PARKING = "clickerParking";
 
 
 
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
+    private ArrayList<Parking> parkings;
 
-    private ArrayList<Parking> parkings = new ArrayList<Parking>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,11 +61,8 @@ public class MainActivity extends AppCompatActivity implements ParkingAdapter.On
                 if(!response.isSuccessful()){return;}
                 if(response.isSuccessful() && response.body() != null)
                 {
-                    ArrayList<Parking> tempParking = new ArrayList<>(response.body());
-                    for(Parking p : tempParking)
-                    {
-                        parkings.add(p);
-                    }
+                    parkings = new ArrayList<>(response.body());
+
                     mAdapter = new ParkingAdapter(parkings);
                     mRecyclerView.setAdapter(mAdapter);
                     ((ParkingAdapter)mAdapter).setOnItemClickListener(MainActivity.this);
@@ -89,15 +87,7 @@ public class MainActivity extends AppCompatActivity implements ParkingAdapter.On
 
         Intent detailIntent = new Intent(this,parking_detail.class);
         Parking clickedParking = parkings.get(position);
-
-        detailIntent.putExtra(EXTRA_FULLNAME, clickedParking.getName());
-        detailIntent.putExtra(EXTRA_FREEPLACES, Integer.toString(clickedParking.getParkingStatus().getAvailableCapacity()));
-        detailIntent.putExtra(EXTRA_NAME, clickedParking.getDescription());
-        detailIntent.putExtra(EXTRA_ADRES, clickedParking.getAddress());
-        detailIntent.putExtra(EXTRA_CONTACTINFO, clickedParking.getContactInfo());
-        detailIntent.putExtra(EXTRA_TOTALCAP, Integer.toString(clickedParking.getParkingStatus().getTotalCapacity()));
-
+        detailIntent.putExtra(EXTRA_PARKING, clickedParking);
         startActivity(detailIntent);
-
     }
 }

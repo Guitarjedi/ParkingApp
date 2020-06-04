@@ -1,6 +1,8 @@
 package com.example.parkingapplicatie2;
 
-public class Parking {
+import java.io.Serializable;
+
+public class Parking implements Serializable {
     private ParkingStatus parkingStatus;
     private String name;
     private String description;
